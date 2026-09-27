@@ -1,0 +1,198 @@
+:root {
+  --bg-canvas: #f7f2ea;
+  --bg-surface: #fffdfa;
+  --bg-surface-alt: #efe8dd;
+  --border: #e0d7c9;
+  --text-primary: #26221d;
+  --text-secondary: #5c5449;
+  --text-muted: #6f6659;
+  --brand: #1f6f6b;
+  --brand-soft: #d9ecea;
+  --sand-soft: #f6ead6;
+  --lavender-soft: #eae5f7;
+  --accent: #b8542f;
+  --accent-pressed: #993f1f;
+  --focus: #155e59;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-canvas: #16130f;
+    --bg-surface: #211d18;
+    --bg-surface-alt: #2b261f;
+    --border: #3a342b;
+    --text-primary: #f4eee4;
+    --text-secondary: #c3b9a9;
+    --text-muted: #a99e8e;
+    --brand: #67c9bd;
+    --brand-soft: #1d3a37;
+    --sand-soft: #33291d;
+    --lavender-soft: #2a2440;
+    --accent: #f08a5d;
+    --accent-pressed: #d8734a;
+    --focus: #7fd9cd;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2rem, 6vw, 3.25rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-top: 2.5rem; }
+h3 { font-size: 1.25rem; font-weight: 700; margin-top: 1.5rem; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--brand); }
+
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.wrap {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+header.site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+header.site .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+header.site .logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+header.site nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero {
+  padding: 3rem 0 2rem;
+}
+
+.hero .lead {
+  font-size: 1.35rem;
+  color: var(--text-secondary);
+  max-width: 34rem;
+}
+
+.stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.stores a {
+  display: inline-block;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fffdfa;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.stores a:hover { background: var(--accent-pressed); }
+
+.stores a.soon {
+  background: var(--bg-surface-alt);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.5rem 0;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.card h3 { margin-top: 0; }
+
+.card p { margin: 0; color: var(--text-secondary); }
+
+.card.sand { background: var(--sand-soft); border-color: transparent; }
+.card.brand { background: var(--brand-soft); border-color: transparent; }
+.card.lavender { background: var(--lavender-soft); border-color: transparent; }
+
+.countdown {
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.meta { color: var(--text-muted); font-size: 0.95rem; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 1rem;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+th { font-weight: 700; }
+
+footer.site {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+footer.site a { margin-right: 1rem; }
