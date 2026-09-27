@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Brief — html / css-custom-properties</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 2rem; background: #0b0b0c; color: #e7e7ea;
+         font: 15px/1.6 Inter, system-ui, sans-serif; max-width: 60rem; margin-inline: auto; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-top: 2.5rem; letter-spacing: .02em;
+       text-transform: uppercase; color: #9a9aa2; border-bottom: 1px solid #232327; padding-bottom: .4rem; }
+  .swatches { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .swatch { width: 7.5rem; border: 1px solid #232327; border-radius: 8px; overflow: hidden; }
+  .swatch .chip { height: 3.5rem; } .swatch .meta { padding: .4rem .6rem; font: 12px/1.4 ui-monospace, monospace; }
+  .rogue .chip { outline: 2px solid #f87171; outline-offset: -2px; }
+  .ramp div { margin: .35rem 0; } .bars { display: flex; align-items: flex-end; gap: .5rem; }
+  .bars div { background: #4ade80; width: 2rem; } .bars span { font: 11px ui-monospace, monospace; display: block; text-align: center; }
+  .chips { display: flex; gap: .75rem; } .chips div { width: 4rem; height: 4rem; background: #1a1a1e; border: 1px solid #3f3f46; }
+  table { border-collapse: collapse; width: 100%; } td, th { border-bottom: 1px solid #232327; padding: .45rem .6rem; text-align: left; }
+  .gap { border-left: 3px solid #f59e0b; padding: .3rem .8rem; margin: .6rem 0; background: #131316; }
+  .muted { color: #9a9aa2; }
+</style>
+</head>
+<body>
+<script type="application/json" id="design-state">{
+  "version": 1,
+  "mode": "scan",
+  "stack": {
+    "framework": "html",
+    "styling": "css-custom-properties"
+  },
+  "tokens": {
+    "colors": {
+      "--bg-canvas": "#f7f2ea",
+      "--bg-surface": "#fffdfa",
+      "--bg-surface-alt": "#efe8dd",
+      "--border": "#e0d7c9",
+      "--text-primary": "#26221d",
+      "--text-secondary": "#5c5449",
+      "--text-muted": "#6f6659",
+      "--brand": "#1f6f6b",
+      "--brand-soft": "#d9ecea",
+      "--sand-soft": "#f6ead6",
+      "--lavender-soft": "#eae5f7",
+      "--accent": "#b8542f",
+      "--accent-pressed": "#993f1f",
+      "--focus": "#155e59"
+    },
+    "type": {
+      "families": [
+        "Nunito, Segoe UI, system-ui, sans-serif",
+        "Source Sans 3, Segoe UI, system-ui, sans-serif"
+      ],
+      "sizesPx": [
+        15,
+        18,
+        20,
+        21.6,
+        24,
+        32,
+        52
+      ]
+    },
+    "spacingPx": [
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      32,
+      48,
+      64
+    ],
+    "radiiPx": [
+      10,
+      16,
+      999
+    ]
+  },
+  "surfaces": [
+    {
+      "name": "contacting-support",
+      "components": [
+        "support.html"
+      ],
+      "applies": true
+    },
+    {
+      "name": "navigation",
+      "components": [
+        "index.html",
+        "support.html",
+        "privacy.html"
+      ],
+      "applies": true
+    },
+    {
+      "name": "footer",
+      "components": [
+        "index.html",
+        "support.html",
+        "privacy.html"
+      ],
+      "applies": true
+    },
+    {
+      "name": "card",
+      "components": [
+        "index.html"
+      ],
+      "applies": true
+    },
+    {
+      "name": "button",
+      "components": [
+        "index.html"
+      ],
+      "applies": true
+    }
+  ],
+  "conventions": [
+    "Warm, calm, low-contrast family brand: paper canvas, teal brand, terracotta accent. Nothing red, nothing alarming.",
+    "Headings in Nunito 800, body in Source Sans 3. Two stacks by design; the app uses the same pair.",
+    "Dark mode via prefers-color-scheme with a full token override; light values above are the canonical set.",
+    "Pill radius (999px) for store CTAs, 16px for cards, 10px for the logo mark. Matches the app icon shapes.",
+    "Copy is plain, spoken, bilingual-ready (English, Finnish, Somali); no marketing exclamation.",
+    "Static GitHub Pages site, no JS, no forms; Support and Privacy pages exist for App Store / Play Console URLs."
+  ],
+  "scenarios": [],
+  "gaps": [
+    {
+      "priority": 1,
+      "current": "landing hero is text-only; no product visual or countdown demo",
+      "target": "one signature element that shows the product (phone countdown) above the fold"
+    },
+    {
+      "priority": 2,
+      "current": "store CTAs are disabled placeholders styled as muted pills",
+      "target": "a clear 'coming soon' treatment that does not read as a broken button"
+    },
+    {
+      "priority": 3,
+      "current": "single 44rem column for all sections",
+      "target": "rhythm between hero, cards and prose sections (spacing scale, section backgrounds)"
+    }
+  ],
+  "inspiration": []
+}</script>
+<div id="brief-root"></div>
+<script>
+(() => {
+  const s = JSON.parse(document.getElementById("design-state").textContent);
+  const el = (t, attrs = {}, ...kids) => { const n = document.createElement(t);
+    for (const [k, v] of Object.entries(attrs)) k === "text" ? n.textContent = v : k === "style" ? n.setAttribute("style", v) : n.setAttribute(k, v);
+    n.append(...kids); return n; };
+  const root = document.getElementById("brief-root");
+  root.append(el("h1", { text: "Design Brief" }),
+    el("p", { class: "muted", text: `mode: ${s.mode} · stack: ${s.stack.framework} / ${s.stack.styling} · schema v${s.version}` }));
+
+  root.append(el("h2", { text: "Colors" }));
+  const sw = el("div", { class: "swatches" });
+  for (const [name, val] of Object.entries(s.tokens.colors)) {
+    if (name === "rogue") continue;
+    sw.append(el("div", { class: "swatch" }, el("div", { class: "chip", style: `background:${val}` }),
+      el("div", { class: "meta", text: `${name} ${val}` })));
+  }
+  for (const val of s.tokens.colors.rogue || [])
+    sw.append(el("div", { class: "swatch rogue" }, el("div", { class: "chip", style: `background:${val}` }),
+      el("div", { class: "meta", text: `ROGUE ${val}` })));
+  root.append(sw);
+
+  root.append(el("h2", { text: "Type" }));
+  const ramp = el("div", { class: "ramp" });
+  for (const fam of s.tokens.type.families)
+    for (const px of s.tokens.type.sizesPx)
+      ramp.append(el("div", { style: `font-family:${fam};font-size:${px}px`, text: `${px}px — ${fam.split(",")[0]} · The quick brown fox` }));
+  root.append(ramp);
+
+  root.append(el("h2", { text: "Spacing" }));
+  const bars = el("div", { class: "bars" });
+  for (const px of s.tokens.spacingPx) bars.append(el("div", { style: `height:${px}px` }, el("span", { text: px })));
+  root.append(bars);
+
+  root.append(el("h2", { text: "Radii" }));
+  const chips = el("div", { class: "chips" });
+  for (const px of s.tokens.radiiPx) chips.append(el("div", { style: `border-radius:${px}px`, title: `${px}px` }));
+  root.append(chips);
+
+  root.append(el("h2", { text: "Surfaces" }));
+  const tbl = el("table", {}, el("tr", {}, el("th", { text: "Surface" }), el("th", { text: "Components" }), el("th", { text: "Applies" })));
+  for (const su of s.surfaces) tbl.append(el("tr", {},
+    el("td", { text: su.name }), el("td", { text: (su.components || []).join(", ") }), el("td", { text: su.applies ? "yes" : "no" })));
+  root.append(tbl);
+
+  root.append(el("h2", { text: "Gaps" }));
+  for (const g of s.gaps) root.append(el("div", { class: "gap", text: `P${g.priority}: ${g.current} → ${g.target}` }));
+
+  root.append(el("h2", { text: "Conventions" }));
+  for (const c of s.conventions) root.append(el("div", { text: "• " + c }));
+
+  root.append(el("h2", { text: "Flow Scenarios" }));
+  for (const sc of s.scenarios) root.append(el("div", {},
+    el("strong", { text: sc.id + ": " }), el("span", { text: sc.task + " — asserts: " + sc.assertions.join("; ") })));
+
+  if ((s.inspiration || []).length) {
+    root.append(el("h2", { text: "Inspiration" }));
+    for (const i of s.inspiration) root.append(el("div", { text: "• " + i }));
+  }
+})();
+</script>
+</body>
+</html>
